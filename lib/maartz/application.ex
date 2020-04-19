@@ -7,9 +7,10 @@ defmodule Maartz.Application do
 
   def start(_type, _args) do
     children = [
-      # Starts a worker by calling: Maartz.Worker.start_link(arg)
-      # {Maartz.Worker, arg}
+      {Task.Supervisor, name: Maartz.TaskSupervisor}
     ]
+
+    Maartz.Storage.create_table()
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
